@@ -62,6 +62,8 @@ async function login(input) {
 }
 
 async function getUser(id, username) {
+  console.log('getUser controller')
+  console.log(id)
   let user = null;
   if (id) user = await User.findById(id);
   if (username) user = await User.findOne({ username });

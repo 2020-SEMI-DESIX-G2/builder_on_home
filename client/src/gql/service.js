@@ -23,8 +23,8 @@ export const GET_USER_SERVICES = gql`
 `;
 
 export const GET_SERVICES = gql`
-  query getUserServices($username: String){
-    getUserServices(username: $username){
+  query getServices($username: String){
+  getServices(username: $username){
     id
     name
     userID

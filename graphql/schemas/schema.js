@@ -26,7 +26,7 @@ const typeDefs = gql`
   type Service {
     id: ID,
     name: String!,
-    userID: String!,
+    userID: ID,
     categoryID: String!,
     description: String!,
     price: Float,
@@ -65,8 +65,8 @@ const typeDefs = gql`
     getUser(id: ID, username: String): User
 
     #services
-    getServices(username: String!): [Service]
-    getUserServices(username: String!): [Service]
+    getServices(username: String): [Service]
+    getUserServices(username: String): [Service]
     getService(id: ID!): Service
 
     #contracts

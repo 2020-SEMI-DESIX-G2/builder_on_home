@@ -7,8 +7,7 @@ const resolvers = {
     // User
     getUser: (_, { id, username }) => userController.getUser(id, username),
     // services
-    getServices: (_, { username }) =>
-      serviceController.getServices(username),
+    getServices: (_, { username }) => serviceController.getServices(username),
     getUserServices: (_, { username }) =>
     serviceController.getUserServices(username),
     getService: (_, { id }) => serviceController.getService(id),

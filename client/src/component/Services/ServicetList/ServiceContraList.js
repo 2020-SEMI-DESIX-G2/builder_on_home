@@ -5,16 +5,11 @@ import ServiceContractItem from './ServiceItem/ServiceContractItem';
 
 const ServiceContractList = props => {
   const services = props.services.map(service => {
-    let worker = service.worker;
-    // if (worker != null){
-    //   console.log(Object.keys(worker));
-    // }
     return (
-      <div className="col-lg-6 col-md-8 mb-6">
+      <div className="col-lg-8 col-md-10 mb-8">
         <ServiceContractItem
           key={service.id}
           service={service}
-          worker={worker}
           userID={props.authUserId}
           onDetail={props.onViewDetail}
         />

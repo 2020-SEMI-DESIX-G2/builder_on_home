@@ -21,7 +21,6 @@ async function createService(input) {
 }
 
 async function getServices(username) {
-    const user = await User.findOne({ username });
     console.log('user service ' + username);
     // if (!user) throw new Error("Usuario no encontrado.");
 
