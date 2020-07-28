@@ -5,13 +5,13 @@ import AuthContext from '../../context/auth-context';
 import './MainNavigation.css';
 
 const MainNavigation = props => (
-    <AuthContext.Consumer>
-        {context => {
+  <AuthContext.Consumer>
+    {context => {
       return (
         <header className="main-navigation">
           <div className="main-navigation__logo">
             <h1>Builder on Home</h1>
-            </div>
+          </div>
           <nav className="main-navigation__items">
             <ul>
               {!context.token && (
@@ -20,30 +20,33 @@ const MainNavigation = props => (
                 </li>
               )}
               {context.token && (
-                  <React.Fragment>
-                    <li>
-                        <NavLink to="/home">Home</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/contracts">My Contracts</NavLink>
-                    </li>
-                    <li>
+                <React.Fragment>
+                  <li>
+                    <NavLink to="/home">Home</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/contracts">My Contracts</NavLink>
+                  </li>
+                  <li>
                     <NavLink to="/service">My Services </NavLink>
-                    </li>
-                    <li>
+                  </li>
+                  <li>
                     <NavLink to="/profile">My Profile </NavLink>
-                    </li>
-                    <li>
-                        <button onClick={context.logout}>Logout</button>
-                    </li>
+                  </li>
+                  <li>
+                    <NavLink to="/file">File </NavLink>
+                  </li>
+                  <li>
+                    <button onClick={context.logout}>Logout</button>
+                  </li>
                 </React.Fragment>
-              )}   
+              )}
             </ul>
           </nav>
         </header>
       );
     }}
-    </AuthContext.Consumer>
+  </AuthContext.Consumer>
 );
 
 export default MainNavigation;

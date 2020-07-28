@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Spinner from '../components/spinner/Spinner';
 import AuthContext from '../context/auth-context';
+require('dotenv').config();
 
 class ProfilePage extends Component {
     state = {
@@ -126,7 +127,6 @@ class ProfilePage extends Component {
                 return res.json();
             })
             .then(resData => {
-                console.log('resData.data ' + resData.data.user);
                 const userInfo = resData.data.user;
                 this.setState({ userInfo: userInfo, isLoading: false });
             })
@@ -156,7 +156,7 @@ class ProfilePage extends Component {
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <h4>Your Profile</h4>
+                                            <h4>Your Profile {this.context.user.name}</h4>
                                         </div>
                                     </div>
                                     <div className="row">
@@ -183,7 +183,7 @@ class ProfilePage extends Component {
                                                 <div className="form-group row">
                                                     <label htmlFor="typeID" className="col-4 col-form-label">Roll Type*</label>
                                                     <div className="col-8">
-                                                        <select id="typeID" name="typeID" className="custom-select" defaulValue={this.state.userInfo.type} ref={this.typeEl}>
+                                                        <select id="typeID" name="typeID" className="custom-select" value={this.state.userInfo.type} ref={this.typeEl}>
                                                             <option value="REGULAR">Regular User</option>
                                                             <option value="WORKER">Worker</option>
                                                         </select>

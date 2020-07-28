@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import Modal from '../components/modal/Modal';
-import Backdrop from '../components/backdrop/BackDrop';
 import ServiceContractList from '../components/Services/ServicetList/ServiceContraList.js';
 import Spinner from '../components/spinner/Spinner';
 import AuthContext from '../context/auth-context';
@@ -132,6 +130,7 @@ class HomePage extends Component {
         };
 
         const token = this.context.token;
+        console.log('token' + token);
         fetch('http://localhost:8000/graphql', {
             method: 'POST',
             body: JSON.stringify(requestBody),
@@ -147,7 +146,7 @@ class HomePage extends Component {
                 return res.json();
             })
             .then(resData => {
-                console.log('resData.data ' + resData.data.services);
+                // console.log('resData.data keys ' + Object.keys(resData.data.services));
                 const services = resData.data.services;
                 this.setState({ services: services, isLoading: false });
             })
@@ -166,25 +165,23 @@ class HomePage extends Component {
     };
 
     render() {
-        // console.log('this.state.services ' + Object.keys(this.state.services));
-        // const serviceList = this.state.services.map(service => {
-        //     return (
-        //         <li key={service.id} className="services__list-item">
-        //             {service.name} <q>{service.price}</q>
-        //         </li>
-        //     );
-        // });
         return (
             <React.Fragment>
-                {this.state.isLoading ? (
-                    <Spinner />
-                ) : (
-                        <ServiceContractList
-                            services={this.state.services}
-                            authUserId={this.context.userId}
-                            onViewDetail={this.showDetailHandler}
-                        /> 
-                    )}
+                <div className="container">
+                    <div className="col-lg-12">
+                        <div className="row">
+                            {this.state.isLoading ? (
+                                <Spinner />
+                            ) : (
+                                    <ServiceContractList
+                                        services={this.state.services}
+                                        authUserId={this.context.userId}
+                                        onViewDetail={this.showDetailHandler}
+                                    />
+                                )}
+                        </div>
+                    </div>
+                </div>
             </React.Fragment>
         );
     }

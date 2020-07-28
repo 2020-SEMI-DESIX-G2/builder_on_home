@@ -3,9 +3,9 @@ const User = require("../../models/user")
 const Service = require("../../models/service");
 const Contract = require("../../models/contract")
 const GraphQLDate = require('graphql-date');
-const { 
-    GraphQLObjectType, GraphQLString, 
-    GraphQLID, GraphQLInt, 
+const {
+    GraphQLObjectType, GraphQLString,
+    GraphQLID, GraphQLInt,
     GraphQLList, GraphQLBoolean, GraphQLFloat
 } = graphql;
 
@@ -13,7 +13,7 @@ const {
 const UserType = new GraphQLObjectType({
     name: 'User',
     fields: () => ({
-        id: { type: GraphQLID  },
+        id: { type: GraphQLID },
         name: { type: GraphQLString },
         email: { type: GraphQLString },
         phone_number: { type: GraphQLString },
@@ -26,9 +26,9 @@ const UserType = new GraphQLObjectType({
         updated_date: {
             type: GraphQLDate
         },
-        service:{
+        service: {
             type: new GraphQLList(ServiceType),
-            resolve(parent,args){
+            resolve(parent, args) {
                 return Service.find({ userID: parent.id });
             }
         }
@@ -38,7 +38,7 @@ const UserType = new GraphQLObjectType({
 const ServiceType = new GraphQLObjectType({
     name: 'Service',
     fields: () => ({
-        id: { type: GraphQLID  },
+        id: { type: GraphQLID },
         name: { type: GraphQLString },
         userID: { type: GraphQLString },
         categoryID: { type: GraphQLString },
@@ -61,7 +61,7 @@ const ServiceType = new GraphQLObjectType({
 const ContractType = new GraphQLObjectType({
     name: 'Contract',
     fields: () => ({
-        id: { type: GraphQLID  },
+        id: { type: GraphQLID },
         userID: {
             type: UserType,
             resolve(parent, args) {
@@ -92,10 +92,24 @@ const ContractType = new GraphQLObjectType({
 const AuthDataType = new GraphQLObjectType({
     name: 'AuthData',
     fields: () => ({
-        userId: { type: GraphQLID  },
+        userId: { type: GraphQLID },
         token: { type: GraphQLString },
-        type: { type: GraphQLString },
+        user: {
+            type: UserType,
+            resolve(parent, args) {
+                return User.findById(parent.userId);
+            }
+        },
         tokenExpiration: { type: GraphQLString },
+    })
+});
+
+const AvatarType = new GraphQLObjectType({
+    name: 'Avatar',
+    fields: () => ({
+        filename: { type: GraphQLString },
+        mimetype: { type: GraphQLString },
+        encoding: { type: GraphQLString },
     })
 });
 
@@ -103,3 +117,4 @@ module.exports.UserType = UserType;
 module.exports.ServiceType = ServiceType;
 module.exports.ContractType = ContractType
 module.exports.AuthDataType = AuthDataType
+module.exports.AvatarType = AvatarType

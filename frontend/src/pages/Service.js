@@ -6,7 +6,7 @@ import ServiceList from '../components/Services/ServicetList/ServiceList';
 import Spinner from '../components/spinner/Spinner';
 import AuthContext from '../context/auth-context';
 
-// import './Service.css';
+import './Service.css';
 
 class ServicePage extends Component {
     state = {
@@ -30,6 +30,7 @@ class ServicePage extends Component {
     }
 
     startCreateServiceHandler = () => {
+        console.log(this.state.creating);
         this.setState({ creating: true });
     };
 
@@ -111,6 +112,7 @@ class ServicePage extends Component {
                     id
                     name
                     userID
+                    categoryID
                     price
                     description
                   }
@@ -164,7 +166,7 @@ class ServicePage extends Component {
         // });
         return (
             <React.Fragment>
-                {this.state.creating && <Backdrop />}
+                {/* {this.state.creating && <Backdrop />} */}
                 {this.state.creating && (
                     <Modal title="Add Service" canCancel canConfirm
                         onCancel={this.modalCancelHandler}
@@ -172,19 +174,27 @@ class ServicePage extends Component {
                         confirmText="Service"
                     >
                         <form className="form">
-                            <div >
+                            <div className="form-group">
                                 <label htmlFor="name">Service Name</label>
                                 <input className="form-control" type="text" id="name" ref={this.nameEl} />
                             </div>
-                            <div >
-                                <label htmlFor="categoryID">Category</label>
-                                <input className="form-control" type="text" id="categoryID" ref={this.categoryIDEl} />
+                            <div className="form-group row">
+                                <div className="col-8">
+                                    <select id="categoryID" name="categoryID" className="custom-select" ref={this.categoryIDEl}>
+                                        <option value="1">Wall Build</option>
+                                        <option value="2">Project Budget</option>
+                                        <option value="3">Structural Design</option>
+                                        <option value="4">Interior Design</option>
+                                        <option value="5">Demolition</option>
+                                        <option value="6">Weld</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div >
+                            <div className="form-group">
                                 <label htmlFor="description">Service Description</label>
-                                <input className="form-control"type="text" id="description" ref={this.descriptionEl} />
+                                <input className="form-control" type="text" id="description" ref={this.descriptionEl} />
                             </div>
-                            <div >
+                            <div className="form-group">
                                 <label htmlFor="price">Price</label>
                                 <input className="form-control" type="text" id="price" ref={this.priceEl} />
                             </div>
@@ -192,6 +202,7 @@ class ServicePage extends Component {
                     </Modal>
                 )}
                 {this.state.selectedService && (
+
                     <Modal
                         title={this.state.selectedService.name}
                         canCancel
