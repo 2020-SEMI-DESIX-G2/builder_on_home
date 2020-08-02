@@ -1,13 +1,17 @@
 const Service = require("../models/service");
 const User = require("../models/user");
 
-async function createService(input) {
+async function createService(username, input) {
+    const user = await User.findOne({ username });
+    if (!user) throw new Error("Usuario no encontrado.");
     const newService = input;
     const { name,
         userID,
         categoryID,
         description,
         price } = newService;
+    newService.userID = user.id;
+    console.log('new service ' + newService);
 
 
     try {

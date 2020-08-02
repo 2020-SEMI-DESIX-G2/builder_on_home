@@ -2,16 +2,16 @@ import gql from "graphql-tag";
 
 
 export const CREATE_SERVICE = gql`
-   mutation createService($input:ServiceInput){
-  createService(input: $input){
+   mutation createService($username: String, $input:ServiceInput){
+  createService(username: $username, input: $input){
     created
   }
 }
 `;
 
 export const GET_USER_SERVICES = gql`
-  query getServices($username: String){
-    getServices(username: $username){
+  query getUserServices($username: String){
+    getUserServices(username: $username){
     id
     name
     userID

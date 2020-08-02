@@ -10,6 +10,7 @@ const typeDefs = gql`
     description: String
     password: String
     avatar: String
+    type: String
     createAt: String
   }
   type Token {
@@ -37,6 +38,7 @@ const typeDefs = gql`
   input UserInput {
     name: String!
     username: String!
+    type: String
     email: String!
     password: String!
   }
@@ -79,10 +81,10 @@ const typeDefs = gql`
     # User
     register(input: UserInput): User
     login(input: LoginInput): Token
-    createContract(input: ContractInput): Contract
+    createContract(username: String, input: ContractInput): Contract
     updateContract(id: ID, input: ContractInput): Contract
     removeContract(id: ID): Contract
-    createService(input: ServiceInput): Service
+    createService(username: String, input: ServiceInput): Service
     updateService(id: ID, input: ServiceInput): Service
     removeService(id: ID): Service
   }

@@ -1,16 +1,14 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
-import { useFormik } from "formik";
+import { Form, Button, Select } from "semantic-ui-react";
+import { useFormik, yupToFormErrors } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import { REGISTER } from "../../../gql/user";
-import "./RegisterForm.scss";
 
 export default function RegisterForm(props) {
   const { setShowLogin } = props;
   const [register] = useMutation(REGISTER);
-
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: Yup.object({
@@ -24,6 +22,8 @@ export default function RegisterForm(props) {
       email: Yup.string()
         .email("El email no es valido")
         .required("El email es obligatorio"),
+      type: Yup.string()
+        .required("La contraseña es obligatoria"),
       password: Yup.string()
         .required("La contraseña es obligatoria")
         .oneOf([Yup.ref("repeatPassword")], "Las contraseñas no son iguales"),
@@ -32,6 +32,7 @@ export default function RegisterForm(props) {
         .oneOf([Yup.ref("password")], "Las contraseñas no son iguales"),
     }),
     onSubmit: async (formData) => {
+      console.log('Formik data' + formData);
       try {
         const newUser = formData;
         delete newUser.repeatPassword;
@@ -55,7 +56,7 @@ export default function RegisterForm(props) {
       <h2 className="register-form-title">
         Regístrate para ver fotos y vídeos de tus amigos.
       </h2>
-      <Form className="register-form" onSubmit={formik.handleSubmit}>
+      <Form className="form" onSubmit={formik.handleSubmit}>
         <Form.Input
           type="text"
           placeholder="Nombre y apellidos"
@@ -80,6 +81,17 @@ export default function RegisterForm(props) {
           onChange={formik.handleChange}
           error={formik.errors.email && true}
         />
+        <div className="form-group row">
+          <div className="col-8">
+            <select id="type" name="type" className="custom-select" value="REGULAR"
+              onChange={formik.handleChange}
+              value={formik.values.type}
+            >
+              <option value="REGULAR">Regular User</option>
+              <option value="WORKER">Worker</option>
+            </select>
+          </div>
+        </div>
         <Form.Input
           type="password"
           placeholder="Contraseña"
@@ -96,8 +108,8 @@ export default function RegisterForm(props) {
           onChange={formik.handleChange}
           error={formik.errors.repeatPassword && true}
         />
-        <Button type="submit" className="btn-submit">
-          Registrarse
+        <Button type="submit" className="btn-submit btn-success">
+          Register
         </Button>
       </Form>
     </>
@@ -109,6 +121,7 @@ function initialValues() {
     name: "",
     username: "",
     email: "",
+    type: "",
     password: "",
     repeatPassword: "",
   };

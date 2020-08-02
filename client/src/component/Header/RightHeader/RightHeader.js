@@ -6,7 +6,7 @@ import { GET_USER } from "../../../gql/user";
 import useAuth from "../../../hooks/useAuth";
 // import ModalUpload from "../../Modal/ModalUpload";
 import ImageNoFound from "../../../assets/png/avatar.png";
-import "./RightHeader.scss";
+// import "./RightHeader.scss";
 
 export default function RightHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -19,17 +19,8 @@ export default function RightHeader() {
   const { getUser } = data;
 
   return (
-    <>
-      <div className="right-header">
-        <Link to="/">
-          <Icon name="home" />
-        </Link>
-        <Icon name="plus" onClick={() => setShowModal(true)} />
-        <Link to={`/${auth.username}`}>
-          <Image src={getUser.avatar ? getUser.avatar : ImageNoFound} avatar />
-        </Link>
-      </div>
-      {/* <ModalUpload show={showModal} setShow={setShowModal} /> */}
-    </>
+    <Link to={`/${auth.username}`} className="nav-link">
+      <Image src={getUser.avatar ? getUser.avatar : ImageNoFound} avatar />
+    </Link>
   );
 }

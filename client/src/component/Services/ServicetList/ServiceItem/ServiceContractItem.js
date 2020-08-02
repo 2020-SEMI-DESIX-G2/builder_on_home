@@ -32,7 +32,7 @@ export default function ServiceContractItem(props) {
                 <div className="card-body">
 
                     <div className="collapse-content">
-                        <button className="btn btn-lg btn-primary" type="submit">Contratar</button>
+                        <button className="btn btn-lg btn-primary float-right" type="submit">Contratar</button>
 
                     </div>
                 </div>

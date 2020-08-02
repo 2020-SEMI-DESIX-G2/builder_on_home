@@ -1,9 +1,11 @@
 import React from 'react';
 
 import ServiceContractItem from './ServiceItem/ServiceContractItem';
+import userAuth from "../../../hooks/useAuth";
 // import './ServiceList.css';
 
 const ServiceContractList = props => {
+  const { auth } = userAuth();
   const services = props.services.map(service => {
     return (
       <div className="col-lg-8 col-md-10 mb-8">

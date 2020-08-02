@@ -40,7 +40,6 @@ export default function App() {
   );
 
   if (auth === undefined) return null;
-  console.log('auth' + authData.auth.email);
 
   return (
     <ApolloProvider client={client}>
