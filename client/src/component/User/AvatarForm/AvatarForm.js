@@ -8,7 +8,7 @@ import "./AvatarForm.scss";
 import AuthContext from "../../../context/AuthContext";
 
 export default function AvatarForm(props) {
-  const { setShowModal, auth } = props;
+  const { auth } = props;
   const [loading, setLoading] = useState(false);
 
   const [updateAvatar] = useMutation(UPDATE_AVATAR, {
@@ -58,7 +58,6 @@ export default function AvatarForm(props) {
         setLoading(false);
       } else {
         setLoading(false);
-        setShowModal(false);
       }
     } catch (error) {
       console.log(error);
@@ -79,8 +78,6 @@ export default function AvatarForm(props) {
 
       if (!data.deleteAvatar) {
         toast.warning("Error al borrar el avatar");
-      } else {
-        setShowModal(false);
       }
     } catch (error) {
       console.log(error);
@@ -93,7 +90,6 @@ export default function AvatarForm(props) {
         Cargar una foto
       </Button>
       <Button onClick={onDeleteAvatar}>Eliminar foto actual</Button>
-      <Button onClick={() => setShowModal(false)}>Cancelar</Button>
       <input {...getInputProps()} />
     </div>
   );

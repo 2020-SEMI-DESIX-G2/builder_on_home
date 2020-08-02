@@ -27,6 +27,7 @@ export default function App() {
   };
 
   const setUser = (user) => {
+    // console.log('set user' + user);
     setAuth(user);
   };
 

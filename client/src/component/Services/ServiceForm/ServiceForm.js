@@ -78,7 +78,7 @@ export default function ServiceForm(props) {
                         onChange={formik.handleChange}
                         error={formik.errors.price && true} />
                 </div>
-                <input type="submit" value="Crear" />
+                <input type="submit" value="Crear" className="btn btn-lg btn-primary float-left"/>
             </Form>
             {created ?
                 <div class="alert alert-success" role="alert">

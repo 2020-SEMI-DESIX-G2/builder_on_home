@@ -7,6 +7,7 @@ import ServiceList from '../../component/Services/ServicetList/ServiceList';
 import userAuth from "../../hooks/useAuth";
 import { Container } from 'semantic-ui-react';
 import ServiceForm from '../../component/Services/ServiceForm';
+import Error404 from '../Error404'
 
 export default function Services() {
     const { auth } = userAuth();
@@ -17,7 +18,10 @@ export default function Services() {
     if (loading) return <Spinner />;
     if (error) return <h1>Loading....</h1>;
     const { getUserServices } = data;
-    // console.log(getUserServices);
+    // console.log(Object.keys(auth));
+    if (auth.type != "WORKER") {
+        return <Error404 />
+    }
 
     return (
         <>
@@ -32,10 +36,17 @@ export default function Services() {
                         <ServiceForm />
                     </div>
                     <div className="col-md-4 order-md-2 mb-4">
-                        <ServiceList
-                            services={getUserServices}
-                            authUserId={auth.id}
-                        />
+                        <h4 className="d-flex justify-content-between align-items-center mb-3">
+                            <span className="text-muted">Your Services</span>
+                            {/* <span className="badge badge-secondary badge-pill">3</span> */}
+                        </h4>
+                        <div className="row">
+                            <ServiceList
+                                services={getUserServices}
+                                authUserId={auth.id}
+                            />
+                        </div>
+
                     </div>
                 </div>
             </div>

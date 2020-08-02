@@ -6,7 +6,7 @@ import { GET_USER } from "../../../gql/user";
 import useAuth from "../../../hooks/useAuth";
 // import ModalUpload from "../../Modal/ModalUpload";
 import ImageNoFound from "../../../assets/png/avatar.png";
-// import "./RightHeader.scss";
+import "./RightHeader.scss";
 
 export default function RightHeader() {
   const [showModal, setShowModal] = useState(false);
@@ -19,8 +19,8 @@ export default function RightHeader() {
   const { getUser } = data;
 
   return (
-    <Link to={`/${auth.username}`} className="nav-link">
-      <Image src={getUser.avatar ? getUser.avatar : ImageNoFound} avatar />
+    <Link to={`/profile/${auth.username}`} className="nav-link">
+      <Image className="profile-image img-circle" src={getUser.avatar ? getUser.avatar : ImageNoFound} avatar />
     </Link>
   );
 }

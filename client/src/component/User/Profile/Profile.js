@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, Image } from "semantic-ui-react";
+import { Grid, Image, Button } from "semantic-ui-react";
 import { useQuery } from "@apollo/client";
 import { GET_USER } from "../../../gql/user";
 import userAuth from "../../../hooks/useAuth";
@@ -7,40 +7,23 @@ import userAuth from "../../../hooks/useAuth";
 import AvatarForm from "../AvatarForm";
 import ImageNoFound from "../../../assets/png/avatar.png";
 import "./Profile.scss";
+import ProfileForm from './ProfileForm';
+import Modal from 'react-modal';
 
 export default function Profile(props) {
   const { username } = props;
-  const [showModal, setShowModal] = useState(false);
-  const [titleModal, setTitleModal] = useState("");
-  const [childrenModal, setChildrenModal] = useState(null);
   const { auth } = userAuth();
+  const [showModal, setshowModal] = useState(false);
   const { data, loading, error, refetch } = useQuery(GET_USER, {
     variables: { username },
   });
 
   if (loading) return null;
-  if (error) return <h1>user Profile not found</h1>;
+  if (error) return <h1>user Profilenot found</h1>;
   const { getUser } = data;
-
-  const handlerModal = (type) => {
-    switch (type) {
-      case "avatar":
-        setTitleModal("Cambiar foto de perfil");
-        setChildrenModal(
-          <AvatarForm setShowModal={setShowModal} auth={auth} />
-        );
-        setShowModal(true);
-        break;
-      case "settigns":
-        setTitleModal("");
-        setChildrenModal(
-          <h1>Settings</h1>
-        );
-        setShowModal(true);
-        break;
-      default:
-        break;
-    }
+  const onOpen = () => {
+    setshowModal(true);
+    console.log('open? ' + showModal);
   };
 
   return (
@@ -50,10 +33,22 @@ export default function Profile(props) {
           <Image
             src={getUser.avatar ? getUser.avatar : ImageNoFound}
             avatar
-            onClick={() => username === auth.username && handlerModal("avatar")}
+            onClick={() => onOpen()}
           />
+
         </Grid.Column>
+        <Grid.Column width={5} className="profile__left">
+          <ProfileForm username={auth.username} />
+        </Grid.Column>
+
       </Grid>
+      <Modal isOpen={showModal} onRequestClose={() => setshowModal(false)}>
+        <h2>Cargar Foto Contract</h2>
+        <div>
+          <AvatarForm auth={auth} />
+          <Button onClick={() => setshowModal(false)} className="btn btn-lg btn-secondary float-right">Close</Button>
+        </div>
+      </Modal>
     </>
   );
 }

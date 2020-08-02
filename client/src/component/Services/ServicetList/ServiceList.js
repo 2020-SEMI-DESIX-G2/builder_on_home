@@ -6,16 +6,16 @@ import ServiceItem from './ServiceItem/ServiceItem';
 const ServiceList = props => {
   const services = props.services.map(service => {
     return (
-        <ServiceItem
-          key={service.id}
-          service={service}
-          userID={props.authUserId}
-          onDetail={props.onViewDetail}
-        />
+      <ServiceItem
+        key={service.id}
+        service={service}
+        userID={props.authUserId}
+        onDetail={props.onViewDetail}
+      />
     );
   });
 
-  return <ul className="row">{services}</ul>;
+  return <ul className="list-group mb-3">{services}</ul>;
 };
 
 export default ServiceList;

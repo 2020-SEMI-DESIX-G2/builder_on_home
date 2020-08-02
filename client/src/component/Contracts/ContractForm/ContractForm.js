@@ -93,7 +93,7 @@ export default function ContractForm(props) {
                         onChange={formik.handleChange}
                         error={formik.errors.price && true} readOnly />
                 </div>
-                <input type="submit" value="Crear" />
+                <input type="submit" value="Crear" className="btn btn-lg btn-primary float-left"/>
             </Form>
             {created ?
                 <div className="alert alert-success" role="alert">

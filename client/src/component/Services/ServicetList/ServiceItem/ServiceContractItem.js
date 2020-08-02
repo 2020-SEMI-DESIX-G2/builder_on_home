@@ -43,10 +43,10 @@ export default function ServiceContractItem(props) {
                     <div className="collapse-content">
                         <Button onClick={() => onOpen()} className="btn btn-lg btn-primary float-right">Contract</Button>
                         <Modal isOpen={showModal} onRequestClose={() => setshowModal(false)}>
-                            <h2>Modal show</h2>
+                            <h2>Create Contract</h2>
                             <div>
                                 <ContractForm worker={getUser} service={props.service} username={auth.username}/>
-                                <Button onClick={() => setshowModal(false)}>Close</Button>
+                                <Button onClick={() => setshowModal(false)} className="btn btn-lg btn-secondary float-right">Close</Button>
                             </div>
                         </Modal>
                     </div>

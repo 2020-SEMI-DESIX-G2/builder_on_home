@@ -14,7 +14,7 @@ const routes = [
         exact: true,
     },
     {
-        path: 'profile/:username',
+        path: '/profile/:username',
         layout: LayoutBasic,
         component: User,
         exact: true

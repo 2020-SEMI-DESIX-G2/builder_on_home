@@ -25,12 +25,15 @@ export const GET_USER = gql`
   query getUser($id: ID, $username: String) {
     getUser(id: $id, username: $username) {
       id
-      name
       username
       email
-      siteWeb
-      description
+      type
       avatar
+      name
+      siteWeb
+      direction
+      phone_number
+      description
     }
   }
 `;
@@ -51,9 +54,17 @@ export const DELETE_AVATAR = gql`
 `;
 
 export const UPDATE_USER = gql`
-  mutation updateUser($input: UserUpdateInput) {
-    updateUser(input: $input)
+  mutation updateUser($username: String, $input: UserUpdateInput){
+  updateUser(username: $username, input: $input){
+    name
+    username
+    email
+    siteWeb
+    description
+    direction
+    phone_number 
   }
+}
 `;
 
 export const SEARCH = gql`
@@ -75,4 +86,3 @@ export const GET_CONTRACTS = gql`
     }
   }
 `;
-

@@ -22,6 +22,9 @@ const resolvers = {
     // User
     register: (_, { input }) => userController.register(input),
     login: (_, { input }) => userController.login(input),
+    updateAvatar: (_, { file }, ctx) => userController.updateAvatar(file, ctx),
+    deleteAvatar: (_, {}, ctx) => userController.deleteAvatar(ctx),
+    updateUser: (_, { username, input }) => userController.updateUser(username, input),
     createContract: (_, { username, input }) => contractController.createContract(username, input),
     updateContract: (_, { id, input }) => contractController.updateContract(id, input),
     removeContract: (_, { id }) => contractController.removeContract(id),

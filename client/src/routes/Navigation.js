@@ -2,8 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import routes from "./routes";
 import { map } from "lodash";
+import userAuth from "../hooks/useAuth";
 
 export default function Navigation() {
+    const { auth } = userAuth();
     return (
         <Router>
             <Switch>

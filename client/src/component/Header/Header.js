@@ -11,7 +11,7 @@ import userAuth from "../../hooks/useAuth";
 export default function Header() {
   const history = useHistory();
   const client = useApolloClient();
-  const { logout } = userAuth();
+  const { auth, logout } = userAuth();
 
 
   const onLogout = () => {
@@ -35,11 +35,14 @@ export default function Header() {
               <Icon name="home" />
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to="/services" className="nav-link">
-              services
+          {auth.type == "WORKER" ?
+            <li className="nav-item">
+              <Link to="/services" className="nav-link">
+                services
             </Link>
-          </li>
+            </li>
+            : null
+          }
           <li className="nav-item">
             <Link to="/contracts" className="nav-link">
               My contracts
