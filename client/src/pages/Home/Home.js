@@ -18,7 +18,7 @@ export default function HomePage() {
                         <HomeServices />
                     </div>
                     <div className="col-lg-6 float-right">
-
+                        
                     </div>
                 </div>
             </React.Fragment>

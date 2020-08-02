@@ -18,7 +18,7 @@ const typeDefs = gql`
   }
   type Contract {
     id: ID,
-    userID: String,
+    workerID: String,
     clientID: String,
     serviceID: String,
     detail: String,
@@ -48,8 +48,8 @@ const typeDefs = gql`
   }
 
   input ContractInput {
-    userID: String!,
-    clientID: String!,
+    workerID: String,
+    clientID: String,
     serviceID: String!,
     detail: String,
     price: Float,

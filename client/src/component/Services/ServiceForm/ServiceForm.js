@@ -8,7 +8,6 @@ import { CREATE_SERVICE } from "../../../gql/service";
 import userAuth from "../../../hooks/useAuth";
 
 export default function ServiceForm(props) {
-    const { setShowLogin } = props;
     const [created, setcreated] = useState(false);
     const { auth } = userAuth();
     const [createService] = useMutation(CREATE_SERVICE);
@@ -34,7 +33,6 @@ export default function ServiceForm(props) {
                     },
                 });
                 setcreated(true);
-                // setShowLogin(true);
             } catch (error) {
                 toast.error(error.message);
                 console.log(error);

@@ -1,12 +1,17 @@
 const Contract = require("../models/contract");
+const User = require("../models/user");
 
-async function createContract(input) {
+async function createContract(username, input) {
+    const user = await User.findOne({ username });
+    if (!user) throw new Error("Usuario no encontrado.");
     const newContract = input;
-    const { clientID,
+    const { 
+        workerID,
+        clientID,
         serviceID,
         detail,
         price } = newContract;
-
+    newContract.clientID = user.id;
 
     try {
         const contract = new Contract(newContract);
@@ -14,7 +19,7 @@ async function createContract(input) {
         contract.save();
         return contract;
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 }
 
