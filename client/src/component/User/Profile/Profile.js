@@ -19,7 +19,7 @@ export default function Profile(props) {
   });
 
   if (loading) return null;
-  if (error) return <h1>user not found</h1>;
+  if (error) return <h1>user Profile not found</h1>;
   const { getUser } = data;
 
   const handlerModal = (type) => {

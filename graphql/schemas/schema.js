@@ -56,7 +56,7 @@ const typeDefs = gql`
   }
   input ServiceInput {
     name: String!,
-    userID: String!,
+    userID: String,
     categoryID: String!,
     description: String!,
     price: Float

@@ -9,12 +9,16 @@ const ServiceContractList = props => {
   const services = props.services.map(service => {
     return (
       <div className="col-lg-8 col-md-10 mb-8">
-        <ServiceContractItem
-          key={service.id}
-          service={service}
-          userID={props.authUserId}
-          onDetail={props.onViewDetail}
-        />
+        {service.userID != props.authUserId ?
+          <ServiceContractItem
+            key={service.id}
+            service={service}
+            userID={props.authUserId}
+            onDetail={props.onViewDetail}
+          />
+          :
+          <></>
+        }
       </div>
     );
   });
@@ -23,3 +27,5 @@ const ServiceContractList = props => {
 };
 
 export default ServiceContractList;
+
+// { getUser != null ? <ha className="card-title font-weight-bold mb-2">{getUser.name}</ha> : "No Worker" }

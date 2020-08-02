@@ -38,7 +38,7 @@ export default function Header() {
           <li className="nav-item">
             <Link to="/services" className="nav-link">
               services
-        </Link>
+            </Link>
           </li>
           <li className="nav-item">
             <Link to="/contracts" className="nav-link">
@@ -46,7 +46,7 @@ export default function Header() {
             </Link>
           </li>
           <li className="nav-item">
-            <Button onClick={logout}>Cerrar sesion</Button>
+            <Button className="btn btn-light" onClick={logout}>Cerrar sesion</Button>
           </li>
           <li className="nav-item">
             <RightHeader />
