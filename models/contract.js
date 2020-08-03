@@ -7,9 +7,10 @@ const contractSchema = new Schema({
     serviceID: String,
     detail: String,
     price: Number,
+    payment: Number,
     created: { type: Date, default: Date.now },
     updated_date: { type: Date, default: Date.now },
-    stateID: String
+    stateID: String,
 });
 
 module.exports = mongoose.model('Contract', contractSchema);

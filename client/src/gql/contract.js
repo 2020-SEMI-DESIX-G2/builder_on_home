@@ -1,6 +1,5 @@
 import gql from "graphql-tag";
 
-
 export const CREATE_CONTRACT = gql`
   mutation createContract($username: String, $input: ContractInput){
   createContract(username: $username, input: $input){
@@ -48,7 +47,15 @@ export const UPDATE_CONTRACT = gql`
   }
 }
 `;
-
+export const UPDATE_CONTRACT_PAY = gql`
+  mutation updateContractPay($id:ID, $input: ContractPayInput){
+    updateContractPay(id: $id, input:$input){
+      id
+      payment
+      stateID
+    }
+  }
+`;
 export const REMOVE_CONTRACT = gql`
   mutation removeContract($id: ID){
     removeContract(id: $id){

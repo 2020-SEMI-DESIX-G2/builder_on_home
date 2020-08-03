@@ -27,6 +27,7 @@ const resolvers = {
     updateUser: (_, { username, input }) => userController.updateUser(username, input),
     createContract: (_, { username, input }) => contractController.createContract(username, input),
     updateContract: (_, { id, input }) => contractController.updateContract(id, input),
+    updateContractPay: (_, { id, input }) => contractController.updateContractPay(id, input),
     removeContract: (_, { id }) => contractController.removeContract(id),
 
     createService: (_, { username, input }) => serviceController.createService(username, input),

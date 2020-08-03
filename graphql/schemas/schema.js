@@ -29,6 +29,9 @@ const typeDefs = gql`
     serviceID: String,
     detail: String,
     price: Float,
+    payment: Float,
+    updated_date: String,
+    stateID: String
   }
   type Service {
     id: ID,
@@ -67,6 +70,10 @@ const typeDefs = gql`
     detail: String,
     price: Float,
   }
+  input ContractPayInput {
+    stateID: String,
+    payment: Float,
+  }
   input ServiceInput {
     name: String!,
     userID: String,
@@ -98,6 +105,7 @@ const typeDefs = gql`
     deleteAvatar: Boolean
     updateUser(username: String, input: UserUpdateInput): User
     createContract(username: String, input: ContractInput): Contract
+    updateContractPay(id: ID, input: ContractPayInput): Contract
     updateContract(id: ID, input: ContractInput): Contract
     removeContract(id: ID): Contract
     createService(username: String, input: ServiceInput): Service

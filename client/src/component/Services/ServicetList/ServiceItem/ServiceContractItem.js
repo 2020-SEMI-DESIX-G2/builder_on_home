@@ -25,7 +25,7 @@ export default function ServiceContractItem(props) {
     return (
         <>
             <div className="card h-100" key={props.service.id}>
-                <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
+                <a href="#"><img className="card-img-top" src={getUser.avatar ? getUser.avatar : "http://placehold.it/700x400"} alt="" height="400" width="700"/></a>
                 <div className="card-body">
                     Trabajador: <h4 className="card-title">
                         {getUser != null ? <q className="card-title font-weight-bold mb-2">{getUser.name}</q> : "No Worker"}

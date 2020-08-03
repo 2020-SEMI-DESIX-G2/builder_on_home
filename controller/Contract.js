@@ -74,12 +74,29 @@ async function updateContract(id, input) {
         console.log(error);
     }
 }
-async function removeContract(id) {
-    const services = await Contract.findByIdAndRemove(id).exec();
 
-    return services;
+async function updateContractPay(id, input) {
+    console.log(input);
+    const newPayment = input;
+    const { stateID, payment } = newPayment;
+    try {
+        return Contract.findByIdAndUpdate(id, {
+            stateID: newPayment.stateID,
+            payment: newPayment.payment,
+        }, function (err) {
+            console.log(err);
+            if (err) return next(err);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+async function removeContract(id) {
+    const contract = await Contract.findByIdAndRemove(id).exec();
+    return contract;
 }
 
 module.exports = {
     createContract,
+    updateContractPay,
 };

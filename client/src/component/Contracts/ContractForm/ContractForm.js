@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/client";
 import { CREATE_CONTRACT } from "../../../gql/contract";
+import PaypalCheckoutButton from '../../PaypalButton';
 
 /**
  * 
@@ -17,8 +18,11 @@ import { CREATE_CONTRACT } from "../../../gql/contract";
 
 export default function ContractForm(props) {
     // console.log('contract ' + Object.keys(props));
+    // let setResp = this;
     const { worker, service } = props;
     const [created, setcreated] = useState(false);
+    const [contractData, setcontractData] = useState({});
+    const [contractID, setcontractID] = useState(undefined);
     const [createContract] = useMutation(CREATE_CONTRACT);
     const formik = useFormik({
         initialValues: initialValues(worker, service),
@@ -32,16 +36,18 @@ export default function ContractForm(props) {
         }),
         onSubmit: async (formData) => {
             formData.workerID = worker.id;
-            console.log('Formik data ' + props.username);
+            setcontractData(setOrder(worker, service));
+            // console.log('Formik data ' + props.username);
             try {
                 const newContract = formData;
 
-                await createContract({
+                const contract = await createContract({
                     variables: {
                         username: props.username,
                         input: newContract,
                     },
                 });
+                setcontractID(contract.data.createContract);
                 setcreated(true);
             } catch (error) {
                 // toast.error(error);
@@ -49,6 +55,8 @@ export default function ContractForm(props) {
             }
         },
     });
+
+    // console.log('contract data ' + contractData);
     return (
         <>
             <Form className="form" onSubmit={formik.handleSubmit}>
@@ -65,7 +73,6 @@ export default function ContractForm(props) {
                     </textarea>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="workerID">Worker</label>
                     <input className="form-control" type="text" id="workerID"
                         value={formik.values.workerID}
                         onChange={formik.handleChange}
@@ -73,6 +80,8 @@ export default function ContractForm(props) {
                 </div>
                 <div className="form-group row">
                     <div className="col-8">
+
+                        <label htmlFor="serviceID">Service Type</label>
                         <select id="serviceID" name="serviceID" className="custom-select"
                             value={formik.values.serviceID}
                             onChange={formik.handleChange}
@@ -93,12 +102,16 @@ export default function ContractForm(props) {
                         onChange={formik.handleChange}
                         error={formik.errors.price && true} readOnly />
                 </div>
-                <input type="submit" value="Crear" className="btn btn-lg btn-primary float-left"/>
+                <input type="submit" value="Create Contract" className="btn btn-lg btn-primary float-left" />
+
             </Form>
             {created ?
-                <div className="alert alert-success" role="alert">
-                    Contract Created!
+                <>
+                    <PaypalCheckoutButton order={contractData} contract={contractID} className="float-rigth" />
+                    <div className="alert alert-success" role="alert">
+                        Contract Created!
                 </div>
+                </>
                 : null
             }
         </>
@@ -111,4 +124,22 @@ function initialValues(worker, service) {
         serviceID: service.categoryID,
         price: service.price,
     };
+}
+
+
+function setOrder(worker, service){
+    const order = {
+        customer: worker.name,
+        total: service.price,
+        items: [
+            {
+                sku: service.id,
+                name: service.detail,
+                price: service.price,
+                quantity: 1,
+                currency: 'USD'
+            },
+        ],
+    };
+    return order;
 }
