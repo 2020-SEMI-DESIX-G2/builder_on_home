@@ -93,7 +93,8 @@ const typeDefs = gql`
 
     #contracts
     getContracts(username: String!): [Contract]
-    getUserContracts(username: String!): [Contract]
+    getWorkerContracts(username: String): [Contract]
+    getClientContracts(username: String): [Contract]
     getContract(id: ID!): Contract
   }
 

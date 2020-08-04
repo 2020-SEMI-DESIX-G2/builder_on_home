@@ -7,21 +7,38 @@ export const CREATE_CONTRACT = gql`
   }
 }
 `;
-export const GET_USER_CONTRACTS = gql`
-  mutation getUserContracts($username: String){
-    getUserContracts(username: $username){
-    id
-    workerID
-    clientID
-    serviceID
-    detail
-    price
-    stateID
+export const GET_WORKER_CONTRACTS = gql`
+  query getWorkerContracts($username: String){
+    getWorkerContracts(username: $username){
+      id
+      workerID
+      clientID
+      serviceID
+      detail
+      price
+      payment
+      updated_date
+      stateID
+  }
+}
+`;
+export const GET_CLIENT_CONTRACTS = gql`
+  query getClientContracts($username: String){
+    getClientContracts(username: $username){
+      id
+      workerID
+      clientID
+      serviceID
+      detail
+      price
+      payment
+      updated_date
+      stateID
   }
 }
 `;
 export const GET_CONTRACT = gql`
-  mutation getContract($id: ID){
+  query getContract($id: ID){
     getContract(id: $id){
     id
     workerID

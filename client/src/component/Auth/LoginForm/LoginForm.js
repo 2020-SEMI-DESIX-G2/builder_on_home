@@ -40,7 +40,7 @@ export default function LoginForm() {
 
   return (
     <Form className="login-form" onSubmit={formik.handleSubmit}>
-      <h2>Entra para ver fotos y vídeos de tus amigos.</h2>
+      <h2>Log in as worker or client</h2>
       <Form.Input
         type="text"
         placeholder="Correo electronico"
@@ -58,7 +58,7 @@ export default function LoginForm() {
         error={formik.errors.password && true}
       />
       <Button type="submit" className="btn-submit">
-        Iniciar sesión
+        Log in
       </Button>
       {error && <p className="submit-error">{error}</p>}
     </Form>

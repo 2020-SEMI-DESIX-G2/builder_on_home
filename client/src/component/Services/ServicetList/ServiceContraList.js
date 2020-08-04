@@ -8,7 +8,7 @@ const ServiceContractList = props => {
   const { auth } = userAuth();
   const services = props.services.map(service => {
     return (
-      <div className="col-lg-8 col-md-10 mb-8">
+      <div className="col-lg-6 col-md-8 mb-6">
         {service.userID != props.authUserId ?
           <ServiceContractItem
             key={service.id}

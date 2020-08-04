@@ -16,11 +16,9 @@ export default function HomeServices() {
     const { getServices } = data;
 
     return (
-        <>
             <ServiceContractList
                 services={getServices}
                 authUserId={auth.id}
             />
-        </>
     );
 }

@@ -5,7 +5,7 @@ async function createContract(username, input) {
     const user = await User.findOne({ username });
     if (!user) throw new Error("Usuario no encontrado.");
     const newContract = input;
-    const { 
+    const {
         workerID,
         clientID,
         serviceID,
@@ -33,13 +33,28 @@ async function getContracts(username) {
     return contracts;
 }
 
-async function getUserContracts(username) {
+async function getWorkerContracts(username) {
+    console.log(username);
     const user = await User.findOne({ username });
     if (!user) throw new Error("Usuario no encontrado.");
 
     const contracts = await Contract.find()
-        .where({ userID: user._id })
+        .where({ workerID: user.id })
         .sort({ created: -1 });
+    console.log(contracts);
+
+    return contracts;
+}
+
+async function getClientContracts(username) {
+    console.log(username);
+    const user = await User.findOne({ username });
+    if (!user) throw new Error("Usuario no encontrado.");
+
+    const contracts = await Contract.find()
+        .where({ clientID: user.id })
+        .sort({ created: -1 });
+    console.log(contracts);
 
     return contracts;
 }
@@ -99,4 +114,6 @@ async function removeContract(id) {
 module.exports = {
     createContract,
     updateContractPay,
+    getWorkerContracts,
+    getClientContracts
 };

@@ -54,7 +54,7 @@ export default function RegisterForm(props) {
   return (
     <>
       <h2 className="register-form-title">
-        Regístrate para ver fotos y vídeos de tus amigos.
+        Sign Up.
       </h2>
       <Form className="form" onSubmit={formik.handleSubmit}>
         <Form.Input

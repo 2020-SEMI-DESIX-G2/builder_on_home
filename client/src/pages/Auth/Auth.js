@@ -10,7 +10,8 @@ export default function Auth() {
 
   return (
     <Container fluid className="auth">
-      <Image src={instaclone} />
+      {/* <Image src={instaclone} /> */}
+      <h1>BUILDER ON HOME</h1>
 
       <div className="container-form">
         {showLogin ? (
@@ -24,14 +25,14 @@ export default function Auth() {
         <p>
           {showLogin ? (
             <>
-              ¿No tienes cuenta?
-              <span onClick={() => setShowLogin(!showLogin)}>Regístrate</span>
+              Dont have an account?
+              <span onClick={() => setShowLogin(!showLogin)}>sign up</span>
             </>
           ) : (
             <>
-              ¡Entra con tu cuenta!
+              ¡log in!
               <span onClick={() => setShowLogin(!showLogin)}>
-                Iniciar sesión
+                Log in
               </span>
             </>
           )}

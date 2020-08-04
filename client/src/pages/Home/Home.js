@@ -14,11 +14,10 @@ export default function HomePage() {
         <>
             <React.Fragment>
                 <div className="container">
-                    <div className="col-lg-12 float-left">
-                        <HomeServices />
-                    </div>
-                    <div className="col-lg-6 float-right">
-                        
+                    <div className="col-lg-12">
+                        <div className="row">
+                            <HomeServices />
+                        </div>
                     </div>
                 </div>
             </React.Fragment>

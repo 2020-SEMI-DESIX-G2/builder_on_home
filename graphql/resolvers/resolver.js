@@ -14,8 +14,10 @@ const resolvers = {
     // contract
     getContracts: (_, { username }) =>
       contractController.getContracts(username),
-    getUserContracts: (_, { username }) =>
-      contractController.getUserContracts(username),
+    getWorkerContracts: (_, { username }) =>
+      contractController.getWorkerContracts(username),
+    getClientContracts: (_, { username }) =>
+      contractController.getClientContracts(username),
     getContract: (_, { id }) => contractController.getContract(id),
   },
   Mutation: {
@@ -23,7 +25,7 @@ const resolvers = {
     register: (_, { input }) => userController.register(input),
     login: (_, { input }) => userController.login(input),
     updateAvatar: (_, { file }, ctx) => userController.updateAvatar(file, ctx),
-    deleteAvatar: (_, {}, ctx) => userController.deleteAvatar(ctx),
+    deleteAvatar: (_, { }, ctx) => userController.deleteAvatar(ctx),
     updateUser: (_, { username, input }) => userController.updateUser(username, input),
     createContract: (_, { username, input }) => contractController.createContract(username, input),
     updateContract: (_, { id, input }) => contractController.updateContract(id, input),
